@@ -5,10 +5,10 @@ import json
 
 my_db = mysql.connector.connect(host='localhost', user='root', password='root')
 my_cursor = my_db.cursor()
-#my_cursor.execute('create database MiniProject')
+my_cursor.execute('create database MiniProject')
 my_db = mysql.connector.connect(host='localhost', user='root', password='root', database='MiniProject')
 my_cursor = my_db.cursor()
-'''my_cursor.execute('create table movie_table('
+my_cursor.execute('create table movie_table('
                   'ID int NOT NULL primary key AUTO_INCREMENT, '
                   'Name varchar(30) NOT NULL, '
                   'Movie varchar(30) NOT NULL, '
@@ -16,7 +16,7 @@ my_cursor = my_db.cursor()
                   'Ticket_Price int, '
                   'Combo varchar(20), '
                   'Food_Quantity int,Food_Price int)')
-'''
+
 
 movie = {}
 user_dict = {}
@@ -156,7 +156,7 @@ while True:
                   if otp == re_otp:
                     print("\nYour ticket has been cancelled succesfully.")
                     movie[user_dict[user_name]['movie']][0] += user_dict[user_name]['Total number of tickets']
-                    my_cursor.execute('delete from movie_table where Name = %s', user_name)
+                    my_cursor.execute('delete from movie_table where Name = %s',(user_name,))
                     my_db.commit()
                     del user_dict[user_name]
                     break;
